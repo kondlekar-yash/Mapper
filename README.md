@@ -11,17 +11,25 @@ This project implements fundamentals of HTML, CSS and modern JavaScript. It also
 To install this project, follow these steps:
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/kondlekar-yash/Mapper.git
-    ```
+   ```bash
+   git clone https://github.com/kondlekar-yash/Mapper.git
+   ```
 2. Navigate to the project directory:
-    ```bash
-    cd Mapper
-    ```
-3. Install node live server, and run using:
-    ```bash
-     live-server --browser='google chrome'
-    ```
+   ```bash
+   cd Mapper
+   ```
+3. Install node
+   ```bash
+    npm install -g npm
+   ```
+4. Install node live server
+   ```bash
+    npm install -g live-server
+   ```
+5. Run project using:
+   ```bash
+    live-server --browser='google chrome'
+   ```
 
 ## License
 
