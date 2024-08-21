@@ -75,6 +75,8 @@ class App {
   constructor() {
     this._getPosition();
 
+    this._getLocalStorage();
+
     //* event handler fn gets the this keyword from the element that called it(ie form) so we need to bind it to the required class.
     form.addEventListener("submit", this._newWorkout.bind(this));
 
@@ -107,6 +109,10 @@ class App {
 
     // Handling clicks on map
     this.#map.on("click", this._showForm.bind(this));
+
+    this.#workouts.forEach((work) => {
+      this._renderWorkoutMarker(work); // render marker on reload, after map is loaded.
+    });
   }
 
   _showForm(mapE) {
@@ -187,6 +193,9 @@ class App {
 
     // Clear input fields and hide form
     this._hideMap();
+
+    // Set local storage to all workouts
+    this._setLocalStorage();
   }
 
   _renderWorkoutMarker(workout) {
@@ -273,6 +282,30 @@ class App {
         duration: 0.75,
       },
     });
+  }
+
+  _setLocalStorage() {
+    localStorage.setItem("workouts", JSON.stringify(this.#workouts)); // local storage only stores strings
+  }
+
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("workouts")); // parse the string back to array/object
+
+    // this conversion of string to array/object and vice versa for local storage loses prototype chain and methods of the object so we need to re-instantiate the object.
+
+    if (!data) return;
+
+    this.#workouts = data;
+
+    this.#workouts.forEach((work) => {
+      this._renderWorkout(work);
+    });
+  }
+
+  _reset() {
+    // TODO: Add reset button instead of using console
+    localStorage.removeItem("workouts");
+    location.reload();
   }
 }
 
